@@ -1,0 +1,36 @@
+class Solution {
+public:
+    //匹配函数
+    int match(char a,char b){
+        if(a=='('&&b==')')
+            return 1;
+        if(a=='['&&b==']')
+            return 1;
+        if(a=='{'&&b=='}')
+            return 1;
+        return 0;
+    }
+    bool isValid(string s) {
+        stack<char>a;
+        for(int i=0;i<s.size();i++)
+        {
+            //空的则放入继续循环
+            if(a.empty())
+            {
+                a.push(s[i]);
+                continue;
+            }
+            //匹配则弹出，不匹配则放入
+            if(match(a.top(),s[i]))
+            {
+                a.pop();
+            }
+            else
+                a.push(s[i]);
+        }
+        if(a.empty())
+            return true;
+        else
+            return false;
+    }
+};
