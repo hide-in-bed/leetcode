@@ -1,0 +1,43 @@
+//It's not so good for runtime
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int p=0;//指向前一个索引
+        int q=1;//指向后一个索引
+        while(q<nums.size()){
+            if(nums[p]==nums[q]){
+                for(int i=q;i<nums.size()-1;i++){
+                    nums[i]=nums[i+1];
+                }
+                nums.pop_back();
+            }
+            else{
+                p++;
+                q++;
+            }
+        }
+        return nums.size();
+    }
+};
+
+//others
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int length = 1;
+        
+        if(nums.empty()) return 0;
+        
+        int temp = nums[0];
+        
+        for(int i = 1; i < nums.size(); ++i) {
+            if(nums[i] != temp) {
+                nums[length] = nums[i];
+                length++;
+                temp = nums[i];
+            }
+        }
+        
+        return length;
+    }
+};
