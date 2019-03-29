@@ -1,0 +1,61 @@
+//这条题目主要考的条件判断，很笨比，没什么意义
+class Solution {
+public:
+    int myAtoi(string str) {
+        //去掉空格
+        int start=0;
+        string t;
+        int out=0;
+        for(int i=0;i<str.size();i++)
+        {
+            if(str[i]==' ')
+            {
+                start++;
+            }
+            else
+            {
+                t=str.substr(start);
+                break;
+            }
+        }
+        if(t[0]=='-')
+        {
+            int i=1;
+            while(i<t.size()&&(t[i]>='0'&&t[i]<='9'))
+            {
+                if(out<-214748364)
+                {
+                    return -2147483648;
+                }
+                out*=10;
+                if(out==-2147483640&&t[i]-'0'>8)
+                    return -2147483648;
+                out-=t[i]-'0';
+                i++;
+            }
+        }
+        else if((t[0]>='0'&&t[0]<='9')||t[0]=='+')
+        {
+            int i;
+            if(t[0]=='+')
+                i=1;
+            else
+                i=0;
+            while(i<t.size()&&(t[i]>='0'&&t[i]<='9'))
+            {
+                if(out>214748364)
+                {
+                    return 2147483647;
+                }
+                out*=10;
+                if(out==2147483640&&t[i]-'0'>=8)
+                    return 2147483647;
+                out+=t[i]-'0';
+                i++;
+            }
+        }
+        else
+            return 0;
+        return out;
+    }
+};
