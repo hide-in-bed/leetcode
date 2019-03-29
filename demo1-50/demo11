@@ -1,0 +1,38 @@
+//暴力 o(n2)
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n=height.size();
+        int max=0,sum=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                sum=(height[i]>height[j]?height[j]:height[i])*(j-i);
+                if(sum>max)
+                    max=sum;
+            }
+        }
+        return max;
+    }
+};
+
+//指针分别指向首尾，依次向内收缩
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int max=0,sum;
+        int l=0,r=height.size()-1;
+        while(l<r)
+        {
+            sum=(height[l]<height[r]?height[l]:height[r])*(r-l);
+            if(sum>max)
+                max=sum;
+            if(height[l]<height[r])
+                l++;
+            else
+                r--;
+        }
+        return max;
+    }
+};
