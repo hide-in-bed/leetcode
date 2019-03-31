@@ -1,0 +1,44 @@
+//n皇后问题
+class Solution {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>>res;
+        vector<int>pos(n,-1);
+        solveNQueensDFS(pos, 0, res);
+        return res;
+    }
+    void solveNQueensDFS(vector<int>&pos,int x, vector<vector<string>>&res)
+    {
+        int n=pos.size();
+        //全部放好了
+        if(x==n)
+        {
+            vector<string>out(n,string(n, '.'));
+            for(int i=0;i<n;i++)
+            {
+                out[i][pos[i]]='Q';
+            }
+            res.push_back(out);
+        }
+        else
+            for(int y=0;y<n;y++)
+            {
+                if(meet(pos,x,y))
+                {
+                    pos[x]=y;
+                    solveNQueensDFS(pos,x+1,res);
+                }
+            }
+    }
+    int meet(vector<int>pos,int x,int y)
+    {
+        for(int i=0;i<x;i++)
+        {
+            if(pos[i]==y||(abs(x-i)==abs(y-pos[i])))
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+};
