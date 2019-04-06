@@ -1,0 +1,14 @@
+//只思考利润，如果当前价格小于后一天价格，则把差值放入利润中
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int p=0,n=prices.size();
+        int res=0;
+        for(int i=0;i<n-1;i++)
+        {
+            if(prices[i]<prices[i+1])
+                res+=prices[i+1]-prices[i];
+        }
+        return res;
+    }
+};
