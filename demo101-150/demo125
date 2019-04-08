@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int p=0,q=s.size()-1;
+        while(p<q)
+        {
+            if(!isAlphaNum(s[p]))
+                p++;
+            else if(!isAlphaNum(s[q]))
+                q--;
+            else if((s[p]+32-'a')%32!=(s[q]+32-'a')%32)
+                return false;
+            else
+            {
+                p++;
+                q--;
+            }
+        }
+        return true;
+    }
+    
+    bool isAlphaNum(char &ch) {
+        if (ch >= 'a' && ch <= 'z') return true;
+        if (ch >= 'A' && ch <= 'Z') return true;
+        if (ch >= '0' && ch <= '9') return true;
+        return false;
+    }
+};
